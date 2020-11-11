@@ -19,6 +19,9 @@ parser.add_argument("--source-system", dest='SOURCE_SYSTEM', type=int,
                           default=255, help='MAVLink source system for this GCS')
 args = parser.parse_args()
 
+f = open("remote_log.txt", "w")
+
+
 def wait_heartbeat(m):
     '''wait for a heartbeat so we know the target system IDs'''
     print("Waiting for PX4 heartbeat")
@@ -42,6 +45,7 @@ while True:
         #print(msg.args.channel)
         print('Load:    {}'.format(msg.load))
         print('Battery: {}'.format(msg.voltage_battery)) 
+        f.write('msg.load')
         time.sleep(.1)
     except:
         print('Connection Dropped')
